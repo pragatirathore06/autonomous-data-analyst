@@ -1,24 +1,14 @@
-from agents.sql_agent import generate_sql
-import duckdb
 import pandas as pd
+from agents.sql_agent import generate_sql
 
-# Load CSV
 df = pd.read_csv("data/sales.csv")
 
-# Ask Question
-question = "Which region has highest revenue?"
+question = "Which region generated the highest revenue?"
 
-# Generate SQL
-sql = generate_sql(question)
+sql = generate_sql(
+    question=question,
+    df=df,
+    table_name="sales"
+)
 
-print("Generated SQL:")
 print(sql)
-
-# Execute SQL
-con = duckdb.connect()
-con.register("sales", df)
-
-result = con.execute(sql).fetchdf()
-
-print("\nResult:")
-print(result)

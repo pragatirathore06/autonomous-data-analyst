@@ -1,7 +1,6 @@
-Date,Product,Region,Revenue
-2025-01-01,Laptop,North,1000
-2025-01-02,Mouse,,200
-2025-01-03,Keyboard,West,
-2025-01-03,Keyboard,West,
-2025-01-04,Laptop,East,1200
-2025-01-05,Mouse,North,250
+Date,Product,Region,Revenue,Profit
+2025-01-01,Laptop,North,1000,200
+2025-01-02,Mouse,South,200,40
+2025-01-03,Keyboard,West,300,60
+2025-01-04,Laptop,East,1200,250
+2025-01-05,Mouse,North,250,50

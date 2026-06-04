@@ -1,5 +1,7 @@
 from google import genai
 from dotenv import load_dotenv
+from agents.sql_agent import build_table_context
+import pandas as pd
 import os
 
 load_dotenv()
@@ -8,23 +10,36 @@ client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
 )
 
-def generate_insights(df):
 
-    sample_data = df.head(20).to_string()
+def generate_insights(df: pd.DataFrame) -> str:
+
+    table_context = build_table_context(df)
 
     prompt = f"""
 You are a senior data analyst.
 
-Analyze the dataset below and provide:
+Dataset Shape:
+{df.shape[0]} rows × {df.shape[1]} columns
 
-1. Key Insights
-2. Trends
-3. Anomalies
-4. Recommendations
+{table_context}
 
-Dataset:
+Analyze the dataset and provide:
 
-{sample_data}
+# Key Insights
+Important patterns in the data.
+
+# Trends
+Interesting trends and observations.
+
+# Anomalies
+Outliers, missing values, unusual records.
+
+# Recommendations
+Actionable recommendations.
+
+Use bullet points.
+
+Be specific and reference actual column names.
 """
 
     response = client.models.generate_content(

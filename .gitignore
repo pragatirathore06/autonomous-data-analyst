@@ -1,0 +1,8 @@
+venv/
+.env
+__pycache__/
+*.pyc
+
+analysis_report.pdf
+chart.png
+heatmap.png
